@@ -29,7 +29,7 @@
 	{{ $topic->title }}
 </p> <label>Body</label>
 <p>
-	{{ $topic->body }}
+	{!! $topic->body !!}
 </p> <label>User_id</label>
 <p>
 	{{ $topic->user_id }}
