@@ -43,5 +43,10 @@ class UsersTableSeeder extends Seeder
         $user->email = '915129420@qq.com';
         $user->avatar = 'https://iocaffcdn.phphub.org/uploads/avatars/20121_1511515154.jpeg!/both/380x380';
         $user->save();
+
+        $user->assignRole('Founder');
+
+        $user = User::find(2);
+        $user->assignRole('Maintainer');
     }
 }
