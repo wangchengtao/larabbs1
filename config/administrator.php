@@ -21,7 +21,7 @@ return array(
      *
      * @type string
      */
-    'title' => config('app.name'),
+    'title' => env('APP_NAME', 'Laravel'),
 
     /*
      * The path to your model config directory
@@ -58,7 +58,11 @@ return array(
      * 		'Analytics' => array('E-Commerce' => 'page.ecommerce.analytics'),
      *	)
      */
-    'menu' => [],
+    'menu' => [
+        '用户与权限' => [
+            'users',
+        ],
+    ],
 
     /*
      * The permission option is the highest-level authentication check that lets you define a closure that should return true if the current user
@@ -67,7 +71,7 @@ return array(
      * @type closure
      */
     'permission' => function () {
-        return Auth::check();
+        return Auth::check() && Auth::user()->can('manage_contents');
     },
 
     /*
@@ -90,7 +94,7 @@ return array(
      *
      * @type string
      */
-    'home_page' => '',
+    'home_page' => 'users',
 
     /*
      * The route to which the user will be taken when they click the "back to site" button
@@ -111,7 +115,7 @@ return array(
      *
      * @type string
      */
-    'logout_path' => false,
+    'logout_path' => '',
 
     /*
      * This is the key of the return path that is sent with the redirection to your login_action. Session::get('redirect') will hold the return URL.
