@@ -10,7 +10,7 @@ return [
 
         // 默认可用的发送网关
         'gateways' => [
-            'tengxun',
+            'qcloud',
         ],
     ],
 
@@ -19,8 +19,9 @@ return [
         'errorlog' => [
             'file' => '/tmp/easy-sms.log',
         ],
-        'tengxun' => [
+        'qcloud' => [
             'api_key' => env('TENGXUN_APP_KEY'),
+            'sdk_app_id' => env('TENGXUN_APP_ID'),
        ],
     ],
 ];
