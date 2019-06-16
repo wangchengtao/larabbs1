@@ -25,7 +25,7 @@ trait LastActivedAtHelper
 
     public function syncUserActivedAt()
     {
-        $hash = $this->$this->getHashFromDateString(Carbon::yesterday()->toDateString());
+        $hash = $this->getHashFromDateString(Carbon::yesterday()->toDateString());
 
         $dates = Redis::hGetAll($hash);
 
