@@ -15,7 +15,7 @@ class VerificationCodesController extends Controller
 
         // 随机生成四位随机数, 左侧补0
         $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
-        $limit = 2;
+        $limit = 3;
 
         try {
             $result = $easySms->send($phone, [
