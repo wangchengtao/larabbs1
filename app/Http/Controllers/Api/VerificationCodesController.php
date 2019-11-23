@@ -16,8 +16,18 @@ class VerificationCodesController extends Controller
      */
     public function store(VerificationCodeRequest $request, EasySms $easySms)
     {
-        $phone = $request->phone;
+        $captchasData = \Cache::get($request->captcha_key);
 
+        if (!$captchasData) {
+            $this->response->error('图片验证码失效', 422);
+        }
+
+        if (!hash_equals($captchasData['captcha'], $request->captcha_code)) {
+            \Cache::forget($request->captcha_key);
+            $this->response->errorUnauthorized('验证码错误');
+        }
+
+        $phone = $captchasData['phone'];
         if (!app()->environment('production')) {
             $code = '1234';
         } else {
@@ -33,7 +43,7 @@ class VerificationCodesController extends Controller
                 ]);
             } catch (NoGatewayAvailableException $exception) {
                 $message = $exception->getException('aliyun')->getMessage();
-                return $this->response->errorInternal($message ?: '短信发送异常');
+                $this->response->errorInternal($message ?: '短信发送异常');
             }
         }
 
@@ -41,6 +51,7 @@ class VerificationCodesController extends Controller
         $expireAt = now()->addMinutes(10);
         // 缓存验证码 10分钟过期
         \Cache::put($key, ['phone' => $phone, 'code' => $code], $expireAt);
+        \Cache::forget($request->captcha_key);
 
         return $this->response->array([
             'key' => $key,
