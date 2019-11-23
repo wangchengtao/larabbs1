@@ -9,25 +9,32 @@ use Overtrue\EasySms\Exceptions\NoGatewayAvailableException;
 
 class VerificationCodesController extends Controller
 {
+    /**
+     * @param \App\Http\Requests\Api\VerificationCodeRequest $request
+     * @param \Overtrue\EasySms\EasySms                      $easySms
+     * @throws \Overtrue\EasySms\Exceptions\InvalidArgumentException
+     */
     public function store(VerificationCodeRequest $request, EasySms $easySms)
     {
         $phone = $request->phone;
 
-        // 随机生成四位随机数, 左侧补0
-        $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
-        $limit = 3;
+        if (!app()->environment('production')) {
+            $code = '1234';
+        } else {
+            // 随机生成四位随机数, 左侧补0
+            $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
 
-        try {
-            $result = $easySms->send($phone, [
-                // 'content' => "【BBS】{$code}为您的登录验证码，请于{$limit}分钟内填写。如非本人操作，请忽略本短信。",
-                'template' => 352225,
-                'data' => [
-                    $code, $limit
-                ],
-            ]);
-        } catch (NoGatewayAvailableException $exception) {
-            $message = $exception->getException('qcloud')->getMessage();
-            return $this->response->errorInternal($message ?: '短信发送异常');
+            try {
+                $easySms->send($phone, [
+                    'template' => config('easysms.gateways.aliyun.templates.register'),
+                    'data' => [
+                        'code' => $code
+                    ],
+                ]);
+            } catch (NoGatewayAvailableException $exception) {
+                $message = $exception->getException('aliyun')->getMessage();
+                return $this->response->errorInternal($message ?: '短信发送异常');
+            }
         }
 
         $key = 'verificationCode_' . str_random(15);
@@ -38,6 +45,6 @@ class VerificationCodesController extends Controller
         return $this->response->array([
             'key' => $key,
             'expired_at' => $expireAt->toDateTimeString(),
-        ])->setStateCode(201);
+        ])->setStatusCode(201);
     }
 }
