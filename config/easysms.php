@@ -1,7 +1,7 @@
 <?php
 return [
     // HTTP 请求的超时时间
-    'timeout' => 5,
+    'timeout' => 10,
 
     // 默认的发送配置
     'default' => [
@@ -10,7 +10,7 @@ return [
 
         // 默认可用的发送网关
         'gateways' => [
-            'qcloud',
+            'aliyun',
         ],
     ],
 
@@ -22,6 +22,11 @@ return [
         'qcloud' => [
             'api_key' => env('TENGXUN_APP_KEY'),
             'sdk_app_id' => env('TENGXUN_APP_ID'),
-       ],
+        ],
+        'aliyun' => [
+            'access_key_id' => env('SMS_ALIYUN_ACCESS_KEY_ID'),
+            'access_key_secret' => env('SMS_ALIYUN_ACCESS_KEY_SECRET'),
+            'sign_name' => env('Larabbs'),
+        ],
     ],
 ];
