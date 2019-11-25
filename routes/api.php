@@ -35,6 +35,10 @@ $api->version('v1', [
         $api->group(['middleware' => 'api.auth'], function ($api) {
             // 当前登录用户信息
             $api->get('user', 'UsersController@me')->name('api.users.show');
+            // 编辑登录用户信息
+            $api->patch('user', 'UsersController@update')
+                ->name('api.user.update');
+            $api->post('images', 'ImagesController@store')->name('api.images.store');
         });
 
         $api->get('version', function () {

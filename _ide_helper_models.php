@@ -31,6 +31,30 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Image
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $type
+ * @property string $path
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Image whereUserId($value)
+ */
+	class Image extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Link
  *
  * @property int $id
@@ -109,6 +133,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Category $category
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reply[] $replies
+ * @property-read int|null $replies_count
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Topic newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Topic newQuery()
@@ -154,10 +179,15 @@ namespace App\Models{
  * @property int $notification_count
  * @property string|null $last_actived_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Permission[] $permissions
+ * @property-read int|null $permissions_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reply[] $replies
+ * @property-read int|null $replies_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[] $roles
+ * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Topic[] $topics
+ * @property-read int|null $topics_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User permission($permissions)
