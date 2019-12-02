@@ -54,6 +54,9 @@ $api->version('v1', [
         // 图片验证码
         $api->post('captchas', 'CaptchasController@store')
             ->name('api.captchas.store');
+        // 发布话题
+        $api->post('topics', 'TopicsController@store')
+            ->name('api.topics.store');
         // 第三方登录
         $api->post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')
             ->name('api.socials.authorizations.store');
