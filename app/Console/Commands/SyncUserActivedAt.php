@@ -39,6 +39,6 @@ class SyncUserActivedAt extends Command
     public function handle(User $user)
     {
         $user->syncUserActivedAt();
-        $this->info('同步成功');
+        $this->info('同步成功111');
     }
 }
