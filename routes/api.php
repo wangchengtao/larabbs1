@@ -22,7 +22,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => 'serializer:array',
+    'middleware' => ['serializer:array', 'bindings'],
 ], function ($api) {
     $api->group([
         'middleware' => 'api.throttle',
@@ -57,6 +57,8 @@ $api->version('v1', [
         // 发布话题
         $api->post('topics', 'TopicsController@store')
             ->name('api.topics.store');
+        $api->patch('topics/{topic}', 'TopicsController@update')
+            ->name('api.topics.update');
         // 第三方登录
         $api->post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')
             ->name('api.socials.authorizations.store');
