@@ -40,6 +40,13 @@ $api->version('v1', [
             $api->patch('user', 'UsersController@update')
                 ->name('api.user.update');
             $api->post('images', 'ImagesController@store')->name('api.images.store');
+            // 发布话题
+            $api->post('topics', 'TopicsController@store')
+                ->name('api.topics.store');
+            $api->patch('topics/{topic}', 'TopicsController@update')
+                ->name('api.topics.update');
+            $api->delete('topics/{topic}', 'TopicsController@destroy')
+                ->name('api.topics.destroy');
         });
 
         $api->get('version', function () {
@@ -54,11 +61,6 @@ $api->version('v1', [
         // 图片验证码
         $api->post('captchas', 'CaptchasController@store')
             ->name('api.captchas.store');
-        // 发布话题
-        $api->post('topics', 'TopicsController@store')
-            ->name('api.topics.store');
-        $api->patch('topics/{topic}', 'TopicsController@update')
-            ->name('api.topics.update');
         // 第三方登录
         $api->post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')
             ->name('api.socials.authorizations.store');
