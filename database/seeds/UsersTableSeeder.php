@@ -16,12 +16,12 @@ class UsersTableSeeder extends Seeder
 
         // 头像假数据
         $avatars = [
-            'https://iocaffcdn.phphub.org/uploads/images/201710/14/1/s5ehp11z6s.png',
-            'https://iocaffcdn.phphub.org/uploads/images/201710/14/1/Lhd1SHqu86.png',
-            'https://iocaffcdn.phphub.org/uploads/images/201710/14/1/LOnMrqbHJn.png',
-            'https://iocaffcdn.phphub.org/uploads/images/201710/14/1/xAuDMxteQy.png',
-            'https://iocaffcdn.phphub.org/uploads/images/201710/14/1/ZqM7iaP4CR.png',
-            'https://iocaffcdn.phphub.org/uploads/images/201710/14/1/NDnzMutoxX.png',
+            'https://cdn.learnku.com/uploads/images/201710/14/1/s5ehp11z6s.png',
+            'https://cdn.learnku.com/uploads/images/201710/14/1/Lhd1SHqu86.png',
+            'https://cdn.learnku.com/uploads/images/201710/14/1/LOnMrqbHJn.png',
+            'https://cdn.learnku.com/uploads/images/201710/14/1/xAuDMxteQy.png',
+            'https://cdn.learnku.com/uploads/images/201710/14/1/ZqM7iaP4CR.png',
+            'https://cdn.learnku.com/uploads/images/201710/14/1/NDnzMutoxX.png',
         ];
 
         $users = factory(User::class)
@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
         $user = User::find(1);
         $user->name = 'wangct';
         $user->email = '915129420@qq.com';
-        $user->avatar = 'https://iocaffcdn.phphub.org/uploads/avatars/20121_1511515154.jpeg!/both/380x380';
+        $user->avatar = 'https://cdn.learnku.com/uploads/avatars/20121_1511515154.jpeg!/both/380x380';
         $user->save();
 
         $user->assignRole('Founder');
